@@ -1,6 +1,6 @@
 <?php
 
-$dsn="データベース名";//まずはデータベースに接続する
+$dsn="データベース名";//まずはデータベースに接続する、接続情報は必ず伏せる
 $user="ユーザー名";
 $password="パスワード";
 $pdo=new PDO($dsn,$user,$password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
@@ -24,9 +24,9 @@ $pdo=new PDO($dsn,$user,$password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNIN
 if(!empty($_POST["namae"])&&($_POST["komennto"])&&($_POST["pasua"])){//名前、コメント、パスワードが入力されていた時
   	$namae=$_POST["namae"];
   	$komennto=$_POST["komennto"];
-  	$nitiji=date("Y/m/d H:i:s");
+  	$nitiji=date("Y/m/d H:i:s");//date関数
 	$pasua=$_POST["pasua"];
-
+	
 	if(!empty($_POST["hennsyuu"])){//編集番号があるとき
 	$sql = 'SELECT * FROM tblname';//読み込む
 	$stmt=$pdo->query($sql);
@@ -60,15 +60,13 @@ $sql = 'SELECT * FROM tblname';
 $stmt=$pdo->query($sql);
 $results= $stmt -> fetchall();//fetchallで配列にする
 	foreach ($results as $row){//$resultsをrowとして一つずつ取り出して調べる
-
 		if($sakujyo==$row["id"] and $_POST["pasub"]==$row["pasua"]){//投稿番号が削除番号と一致していた場合
 		$id = $sakujyo;//削除機能を用いる
 		$sql = 'delete from tblname where id=:id';
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam(':id', $sakujyo, PDO::PARAM_INT);
 		$stmt->execute();
-
-                }
+		}
 	}
 }
 		
@@ -90,7 +88,6 @@ $results= $stmt -> fetchall();//fetchallで配列にする
 	}
 }
 		
-
 ?>
 
 <html>
