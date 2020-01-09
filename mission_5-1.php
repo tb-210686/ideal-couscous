@@ -80,10 +80,10 @@ $sql = 'SELECT * FROM tblname';
 $stmt=$pdo->query($sql);
 $results= $stmt -> fetchall();//fetchallで配列にする
 	foreach ($results as $row){//$resultsをrowとして一つずつ取り出して調べる		
-		if($hennsyuubangou==$row["id"] and $_POST["pasuc"]==$row["pasua"] ){//編集番号と投稿番号が一致していればフォームに表示できるようにする
-			$edit_name=$row["namae"];
-			$edit_komennto=$row["komennto"];
-			$hennsyuu=$row["id"];
+		if($hennsyuubangou==$row["id"] and $_POST["pasuc"]==$row["pasua"] ){//編集番号と投稿番号が一致していればフォームに表示
+		$edit_name=$row["namae"];
+		$edit_komennto=$row["komennto"];
+		$hennsyuu=$row["id"];
 		}
 	}
 }
